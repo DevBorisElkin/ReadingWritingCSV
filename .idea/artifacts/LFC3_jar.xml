@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LFC3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LFC3_jar</output-path>
+    <root id="archive" name="LFC3.jar">
+      <element id="module-output" name="LFC3" />
+    </root>
+  </artifact>
+</component>

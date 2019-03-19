@@ -1,0 +1,6 @@
+articul String;name String;price Integer;points Float;country String
+JDB-14;JDB-port;1wg2;0.22;USA
+ARH-66;ARG-screen;44;87.2da;China
+LKI-775;LK-cabel;224;123;USA22
+RT-7;RT-counter;9;76.2;UK
+BBN-34;BB-connector;2efw35;55.32;Japan
