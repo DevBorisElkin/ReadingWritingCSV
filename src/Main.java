@@ -10,9 +10,8 @@ import java.util.Scanner;
  *  Сейчас включен упрощённый ввод данных.
  *  1 - Имя файла на подачу
  *  2 - Имя файла на вывод
- *  3 - Кодировка (используется только на вывод)
- *  4 - Имя столбика, который ищем
- *  5 - Данные, которые ищем
+ *  3 - Имя столбика, который ищем
+ *  4 - Данные, которые ищем
 */
 
 @SuppressWarnings("all")
@@ -41,7 +40,7 @@ public class Main {
     /** Если True, выведет ВСЕ значения в нужной колонке
      *  по поисковому запросу, если False
      *  - только первое(как по заданию). */
-    public static boolean multimpleResults = false;
+    public static boolean multimpleResults = true;
 
     /**
      * Протсо вывод в консоль. Слишком большие
@@ -93,35 +92,41 @@ public class Main {
 
         /**Проверка на наличие аргументов.*/
         if(args.length>0){
-
-            /**Здесь проверяем, усложнённый ли поисковый запрос,
-             *  или упрощённый. В урощённом убраны лишние ключевые слова.*/
-            if(simplifiedSearchRequest){
-                InputName=args[0];    //Это урощённый вариант.
-                OutputName=args[1];
-                ENCODING=args[2];
-                ColumnToSearch=args[3];
-                DataToSearch= args[4];
+            if(args[0].toLowerCase().equals("help")) {
+                help();
             }else{
-                InputName = args[1];
-                OutputName = args[3];
-                ENCODING = args[5];
-                ColumnToSearch = args[7];
-                DataToSearch = args[9];
+                /**Здесь проверяем, усложнённый ли поисковый запрос,
+                 *  или упрощённый. В урощённом убраны лишние ключевые слова.*/
+                try{
+                    if(simplifiedSearchRequest){
+                        InputName=args[0];    //Это урощённый вариант.
+                        OutputName=args[1];
+                        ColumnToSearch=args[2];
+                        DataToSearch= args[3];
+                    }else{
+                        InputName = args[1];
+                        OutputName = args[3];
+                        ENCODING = args[5];
+                        ColumnToSearch = args[7];
+                        DataToSearch = args[9];
+                    }
+                }catch (Exception e){
+                    System.out.println("Ошибка ввода данных. Прекращение работы программы. Введите \"Help\" для получения помощи.");
+                    System.exit(1);
+                }
+                /** Производим запись в ячейки данных
+                 * а также проверям на ошибки*/
+                convertDataToCells();
+
+                /** Выводим записанный список в консоль, если размер позволяет **/
+                if(printListToConsole)CustomSupport.printList(dataList);
+
+                /** / Производим поиск значения(ний) и запись в текстовый файл **/
+                CustomSupport.searchFor(ColumnToSearch,DataToSearch);
+
+                /** Выводим кол-во ошибок в типах данных  **/
+                System.out.println("Ошибок в типах данных: "+ WrongDataErrorCounter);
             }
-
-            /** Производим запись в ячейки данных
-             * а также проверям на ошибки*/
-            convertDataToCells();
-
-            /** Выводим записанный список в консоль, если размер позволяет **/
-            if(printListToConsole)CustomSupport.printList(dataList);
-
-            /** / Производим поиск значения(ний) и запись в текстовый файл **/
-            CustomSupport.searchFor(ColumnToSearch,DataToSearch);
-
-            /** Выводим кол-во ошибок в типах данных  **/
-            System.out.println("Ошибок в типах данных: "+ WrongDataErrorCounter);
         }else{
             System.out.println("No arguments, try again");
         }
@@ -273,6 +278,15 @@ public class Main {
             dataList.add(sublist);
         }
         scanner.close();
+    }
+
+    private static void help() {
+        System.out.println("Правильный порядок для поиска данных:");
+        System.out.println("1) Имя файла ввода");
+        System.out.println("2) Имя файла вывода");
+        System.out.println("3) Столбик для поиска информации");
+        System.out.println("4) Данные для поиска");
+        System.out.println("Пример полной команды запуска:java –jar gen_csv.jar in.csv out.csv country USA");
     }
 
 

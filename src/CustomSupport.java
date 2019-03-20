@@ -147,10 +147,7 @@ public class CustomSupport {
         }
         if(!correct&!b_string) {
             System.out.println("Ошибка в поисковом запросе. Поиск в колонке с типом "+columnDatatype+" заданное значение имеет другой тип");
-        }else if(b_string){
-            System.out.println("Ошибка в поисковом запросе. Поиск в колонке с типом "+columnDatatype+", заданное значение имеет тип String");
-        }else{
-            System.out.println("Какая-то несостыковка в типах данных.");
         }
     }
+
 }
