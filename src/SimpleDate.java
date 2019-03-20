@@ -1,3 +1,6 @@
+/**
+ * Кастомный класс для хранения и проверки правильности даты.
+ */
 class SimpleDate{
     Integer day, month, year;
     public SimpleDate(String date) { //  dd.mm.yyyy
@@ -36,6 +39,11 @@ class SimpleDate{
     public String toString() {
         return getDateStr();
     }
+
+    /**
+     * Проверка на правильность даты. Год не может быть больше 2100 лет.
+     * Месяц ограничен значением 12, день - значением 31.
+     */
     public static boolean checkIfDateIsWrong(String a){
         boolean wrong=false;
         int a1=0;

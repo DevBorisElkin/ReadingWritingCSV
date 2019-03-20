@@ -1,3 +1,8 @@
+/**
+ * Кастомный класс для хранения данных. Так-называемая "ячейка данных".
+ * Все данные, которые не проходят проверку на правильность
+ * типа конвертируются в тип данных String
+ */
 class DataCell<T> {
     T data;
     Main.DataType dataType;
@@ -17,34 +22,25 @@ class DataCell<T> {
         return dataType;
     }
 
-    public void setData(T data) {
-        this.data = data;
-    }
-
     public void setDataType(Main.DataType dataType) {
         this.dataType = dataType;
     }
 
+    /** Простая проверка на корректность типа  */
     public void isTypeCorrect() {
         boolean correct = false;
         T dataTmp = data;
         if (dataTmp.getClass() == Integer.class && getDataType() == Main.DataType.INTEGER) {
-            correct = true;
-        }
+            correct = true; }
         if (dataTmp.getClass() == String.class && getDataType() == Main.DataType.STRING) {
-            correct = true;
-        }
+            correct = true; }
         if (dataTmp.getClass() == SimpleDate.class && getDataType() == Main.DataType.DATE) {
-            correct = true;
-        }
+            correct = true; }
         if (dataTmp.getClass() == Float.class && getDataType() == Main.DataType.FLOAT) {
-            correct = true;
-        }
+            correct = true; }
         if (dataTmp.getClass() == String.class && getDataType() == Main.DataType.HEADING) {
-            correct = true;
-        }
+            correct = true; }
         if (!correct) {
-            setDataType(Main.DataType.WRONG_TYPE);
-        }
+            setDataType(Main.DataType.WRONG_TYPE); }
     }
 }
